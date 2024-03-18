@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    </link>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body style="background-color: rgb(178, 154, 201);">
+
+</body>
+
+<script>
+
+    var data = JSON.parse(localStorage.getItem("cartdata"));
+
+    var s = document.createElement("div");
+
+    document.body.appendChild(s);
+
+    for (i = 0; i < data.length; i++) {
+        var card = document.createElement("div");
+        card.setAttribute("class", "card ");
+        card.style.width = "80%";
+        card.style.height = "250px";
+        card.style.marginLeft = "100px"
+        // card.innerText=data[i]
+
+        //boostrap
+        di = document.createElement("div");
+        di.setAttribute("class", "row g-0");
+        card.appendChild(di);
+
+        dc = document.createElement("div");
+        dc.setAttribute("class", "col-4");
+        di.appendChild(dc);
+
+
+
+
+        img = document.createElement("img");
+        img.src = data[i].source;
+        img.style.width = "150px"
+        img.style.height = "180px";
+        img.style.marginLeft = "20px"
+
+        img.style.float = "left"
+        img.style.marginTop = "10px";
+        dc.appendChild(img);
+        // card.appendChild(img);
+
+
+        //second div
+        divv = document.createElement("div");
+        divv.setAttribute("class", "col-8");
+
+
+        //cardbody
+        cb = document.createElement("div");
+        cb.setAttribute("class", "card-body");
+        divv.appendChild(cb);
+
+
+        //title
+        t = document.createElement("p");
+        t.innerText = data[i].title;
+        cb.appendChild(t);
+
+
+
+        //description
+        des = document.createElement("p")
+        des.innerText = data[i].description;
+        cb.appendChild(des);
+
+
+
+
+        //price
+        p = document.createElement("h5");
+        p.innerText = data[i].price;
+        cb.appendChild(p);
+
+        //quantity not working neet to update
+        qu = document.createElement("div");
+        qu.setAttribute("class", "dropdown");
+
+        //button
+        bu = document.createElement("button");
+        bu.setAttribute("class", "btn btn-secondary dropdown-toggle")
+        bu.innerText = "Quantity";
+        qu.appendChild(bu);
+        //list
+        ul = document.createElement("ul")
+        ul.setAttribute("class", "dropdown-menu");
+        qu.appendChild(ul);
+
+        // listitems
+
+        li = document.createElement("li");
+        ul.appendChild(li);
+
+        //anchor
+
+        a = document.createElement("a");
+        a.setAttribute("class", "dropdown-item");
+        a.setAttribute("href", "#");
+        a.innerText = "1";
+        li.appendChild(a);
+
+        a = document.createElement("a");
+        a.setAttribute("class", "dropdown-item");
+        a.setAttribute("href", "#");
+        a.innerText = "2";
+        li.appendChild(a);
+
+        a = document.createElement("a");
+        a.setAttribute("class", "dropdown-item");
+        a.setAttribute("href", "#");
+        a.innerText = "3";
+        li.appendChild(a);
+
+
+
+
+        cb.appendChild(qu);
+
+
+
+
+        di.appendChild(divv);
+
+        //line
+
+        hr = document.createElement("hr");
+
+        s.appendChild(hr);
+
+        //image
+
+        s.appendChild(card);
+
+    }
+
+
+
+    sum = 0;//variable
+
+    for (i = 0; i < data.length; i++) {
+        ar = data[i].price.split("$");
+        sum += Number(ar[1]);
+
+    }
+
+
+    //sum is all cart quantities
+
+    hra = document.createElement("hr")
+    hra.style.marginTop = "20px";
+    s.appendChild(hra);
+
+    //div
+    divv = document.createElement("div");
+    divv.style.marginLeft = "83%"
+
+    s.appendChild(divv);
+
+    total = document.createElement("h3");
+    total.innerText = "Subtotal:";
+    total.style.marginLeft = "30px"
+    divv.appendChild(total);
+
+    cost = document.createElement("p");
+    cost.innerText = "$ " + sum;
+    cost.style.marginLeft = "35px"
+    divv.appendChild(cost)
+
+    bu = document.createElement("button");
+    bu.innerText = "Proceed To Payment";
+    bu.setAttribute("Class", "btn btn-secondary")
+    bu.style.marginBottom = "50px";
+    bu.style.marginTop = "-10px"
+    divv.appendChild(bu);
+
+</script>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+        <style>
+            .div1{
+                width: 500px;
+                height: 550px;
+               margin-bottom: 100px;
+                text-align: center;
+                
+            }
+            form{
+                margin-top: -80px;
+            }
+        </style>
+</head>
+
+<body style="background-color: rgb(176, 195, 226);">
+
+    <h3 style="margin-top: 130px;margin-left: 630px; margin-right: 60px;">Registration Form</h3>
+   
+    <form style="position:absolute; left: 35%; top: 35%; border: 1px solid red;border-radius: 30px; padding: 10px; background-color: rgb(145, 194, 199); ">
+        <div class=" div1 mb-3 mt-3" style="padding: 10px " >
+            <label style="font-size: 30px;" class="form-label ">Enter Username : </label> <br><br>
+            <input type="text " class=" ema" style="margin-left: 20px; border-radius: 5px; padding: 5px;"><br>
+            <span style="color:red;display:none;"></span>
+            <span style="color:red;display:none;">Username Exists try different</span>
+            <br>
+            <label  style="font-size: 30px;" class="form-label pswd">Enter Password : </label><br><br>
+            <input class=" pass" type="password" style="margin-left: 20px; border-radius: 5px;padding: 5px;"><br>
+            <span style="color:red;display:none;">password should be 8 characters</span>
+            <span style="color:red;display:none;" id="spe">password shoould not contains numbers</span>
+
+            <br>
+            <label  style="font-size: 30px;" class="form-label">confirm Password : </label><br><br>
+            <input class="confirm" type="password" style="margin-left: 20px; border-radius: 5px; padding: 5px;"><br>
+            <span style="color:red;display:none;">password and confirm password are not same</span>
+            <br>
+            <input class="btn btn-primary su" type="submit"></button><br><br>
+            <h4>If your not intrested just skip it</h4>
+            <button style="background-color: red;" class=  "  sw btn btn-primary">skip</button>
+           
+
+        </div>
+    </form>
+</body>
+
+<script>
+sww=document.getElementsByClassName("sw")
+    sww[0].addEventListener("click",()=>{
+        window.open("./card.html")
+    })
+
+    // teset
+    var arr = [];
+    var spe = document.getElementById("spe");//password shouldn't contain numbers
+
+    var span = document.getElementsByTagName("span");//errors
+    var f = document.forms;
+    f[0].addEventListener("submit", (e) => {
+        e.preventDefault();
+
+
+        //duplicateusers   multiple users undoddhu
+        if (contarr(e.target[0].value)) {
+            span[1].style.display = "block";
+            e.target[0].style.border= " 2px solid red";
+
+
+        }
+        else {
+            span[1].style.display = "none";
+            e.target[0].style.border = "1px solid black";
+            //password
+            if (e.target[1].value.length != 8) {
+                span[2].style.display = "block";
+                e.target[1].style.border = "2px solid red";
+
+            }
+            else {
+                span[2].style.display = "none";
+                e.target[1].style.border = "2px solid black"   ;
+
+                //passwodnumbers
+                if (!isNaN(Number(e.target[1].value))) {
+
+                    spe.style.display = "block";
+                    e.target[1].style.border = "2px solid red";
+
+                }
+                
+
+                else {
+
+                    spe.style.display = "none";
+                    e.target[1].style.border = "2px solid black";
+                    //confirmpassword
+                    if (e.target[2].value != e.target[1].value) {
+                        span[4].style.display = "block";
+                        e.target[2].style.border = "2px solid red";
+
+                    }
+                    else {
+
+                        span[4].style.display = "none";
+                        e.target[2].style.border = "2px solid black";
+
+
+                        var ob = {
+                            username: e.target[0].value,
+                            password: e.target[1].value,
+
+                        };
+                        arr.push(ob);
+
+                        //.log(arr);
+
+                        localStorage.setItem("regdata", JSON.stringify(arr));//COVERTING OBJECT TO ARRAY
+                        window.open("./loginp.html");
+
+
+                    }
+
+                }
+
+
+            }
+
+
+        }
+
+    }
+
+
+
+    )
+
+    //array conntains
+
+    function contarr(a) {
+        count = 0;
+        for (i = 0; i < arr.length; i++) {
+            if (arr[i].username == a) {
+                count++;
+
+            }
+
+        }
+        if (count > 0) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+
+    }
+
+</script>
+
+</html>
